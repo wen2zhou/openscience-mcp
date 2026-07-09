@@ -39,7 +39,7 @@ Handler = Callable[[dict], str]
 
 def load_schemas(package: str, resource: str = "schemas.json") -> list[dict]:
     """Load the embedded verbatim tool schemas from a server package."""
-    with importlib.resources.files(package).joinpath(resource).open("r") as f:
+    with importlib.resources.files(package).joinpath(resource).open("r", encoding="utf-8") as f:
         data = json.load(f)
     return data["tools"] if isinstance(data, dict) else data
 

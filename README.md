@@ -51,11 +51,11 @@ installs dependencies (about a minute, one time). Subsequent starts are instant.
 
 ### WorkBuddy
 
-This repo ships a self-contained skill, `openscience-mcp-installer`, under
-[`.workbuddy/skills/openscience-mcp-installer`](.workbuddy/skills/openscience-mcp-installer). 
+This repo ships a self-contained skill, `openscience-mcp-connector`, under
+[`.workbuddy/skills/openscience-mcp-connector`](.workbuddy/skills/openscience-mcp-connector). 
 
 ```shell
-python .workbuddy/skills/openscience-mcp-installer/scripts/install.py \
+python .workbuddy/skills/openscience-mcp-connector/scripts/install.py \
   --repo "$(pwd)" --data-dir ~/.cache/openscience-mcp
 # then enable the new connectors in WorkBuddy's connector settings
 ```

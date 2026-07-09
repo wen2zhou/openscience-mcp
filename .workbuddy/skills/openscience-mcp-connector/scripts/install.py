@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Install openscience-mcp into WorkBuddy — zero repo changes.
 
-This is the engine of the openscience-mcp-installer skill. It reads the Claude
+This is the engine of the openscience-mcp-connector skill. It reads the Claude
 `.mcp.json` template from an UNMODIFIED openscience-mcp clone, resolves the
 Claude-specific variables to literal values, and merges the result into
 WorkBuddy's `~/.workbuddy/mcp.json`.
@@ -95,17 +95,24 @@ def resolve_entry(entry: dict, root: str, email: str, ncbi_key: str, data_dir: s
     return out
 
 
+def entry_pkg(entry: dict) -> str:
+    """The mcp package an entry launches. .mcp.json invokes
+    `python bootstrap.py <pkg>`, so the package is the last arg."""
+    args = entry.get("args") or [""]
+    return args[-1]
+
+
 def build_servers(servers: dict, plugin_root: Path, root: str, email: str,
                   ncbi_key: str, data_dir: str, subset: set[str] | None) -> dict:
     launchable = launchable_packages(plugin_root)
     for name, entry in servers.items():
-        pkg = (entry.get("args") or [""])[0]
+        pkg = entry_pkg(entry)
         if pkg and pkg not in launchable:
             sys.exit(
                 f"ERROR: server '{name}' references package '{pkg}' with no "
                 f"server.py under runtime/lib/"
             )
-    registered = {(e.get("args") or [""])[0] for e in servers.values()}
+    registered = {entry_pkg(e) for e in servers.values()}
     unregistered = sorted(launchable - registered)
     if unregistered:
         print(
