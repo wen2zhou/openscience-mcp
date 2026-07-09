@@ -2,7 +2,7 @@
 """test_all_servers.py — integration test harness for the openscience plugin.
 
 For every vendored MCP server it:
-  1. launches the server through bin/launch.sh (the real plugin path),
+  1. launches the server through bin/bootstrap.py (the real plugin path),
   2. performs the MCP handshake (initialize -> initialized -> tools/list),
      enumerating 100% of the server's tools and capturing their schemas,
   3. optionally issues representative live tool calls defined in
@@ -27,7 +27,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 PLUGIN = REPO / "plugins" / "openscience"
-LAUNCH = PLUGIN / "bin" / "launch.sh"
+BOOTSTRAP = PLUGIN / "bin" / "bootstrap.py"
 MCP_JSON = PLUGIN / ".mcp.json"
 RESULTS = REPO / "tests" / "results"
 CALLS_FILE = REPO / "tests" / "representative_calls.json"
@@ -38,7 +38,7 @@ DATA_DIR = os.environ.get("OSPC_TEST_DATA", str(REPO / "tests" / ".venv-data"))
 def server_roster() -> list[tuple[str, str]]:
     """Return [(friendly_key, pkg)] from .mcp.json."""
     cfg = json.loads(MCP_JSON.read_text())["mcpServers"]
-    return [(k, v["args"][0]) for k, v in cfg.items()]
+    return [(k, v["args"][-1]) for k, v in cfg.items()]
 
 
 class MCPClient:
@@ -47,7 +47,7 @@ class MCPClient:
     def __init__(self, pkg: str, boot_timeout: float):
         env = dict(os.environ, CLAUDE_PLUGIN_DATA=DATA_DIR)
         self.proc = subprocess.Popen(
-            ["bash", str(LAUNCH), pkg],
+            [sys.executable, str(BOOTSTRAP), pkg],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             env=env, text=True, bufsize=1,
         )

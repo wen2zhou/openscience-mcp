@@ -1,10 +1,9 @@
 ---
-name: openscience-mcp-installer
+name: openscience-mcp-connector
 description: Install the openscience-mcp life-sciences MCP server suite into WorkBuddy. This skill should be used when a user wants to use openscience-mcp, install life-sciences / bioinformatics MCP servers, or register the aipoch/openscience-mcp plugin with WorkBuddy. It generates a WorkBuddy-compatible config from the Claude .mcp.json template and merges it into ~/.workbuddy/mcp.json with zero changes to the openscience-mcp repo.
-agent_created: true
 ---
 
-# openscience-mcp-installer
+# openscience-mcp-connector
 
 ## Overview
 
@@ -24,23 +23,27 @@ Trigger this skill when a user:
 
 ## Prerequisites
 
-- A local clone of openscience-mcp (or willingness to clone it). The clone
-  stays untouched — only its `.mcp.json` is read.
+- A local copy of the openscience-mcp source (or willingness to download it).
+  The copy stays untouched — only its `.mcp.json` is read.
 - Python 3 on PATH (stdlib only; the bundled script uses no third-party packages).
-- Python >= 3.11 reachable at runtime (launch.sh finds it automatically to
+- Python >= 3.11 reachable at runtime (bootstrap.py finds it automatically to
   build the server virtualenv on first tool call).
 
 ## Workflow
 
-### 1. Locate or clone the repo
+### 1. Locate or download the source
 
-Determine the openscience-mcp clone path. If the user does not have one, clone it:
+Determine the openscience-mcp source path. If the user does not have one, download
+and extract the zip. Python is already a prerequisite, so use it
+— this works identically on macOS, Linux, and Windows:
 
 ```shell
-git clone https://github.com/aipoch/openscience-mcp.git
+python3 -c "import urllib.request,zipfile,io; zipfile.ZipFile(io.BytesIO(urllib.request.urlopen('https://codeload.github.com/aipoch/openscience-mcp/zip/refs/heads/main').read())).extractall('.')"
 ```
 
-Record the absolute path; it becomes `--repo` in the next step.
+This extracts to `./openscience-mcp-main`. Record its absolute path; it becomes
+`--repo` in the next step. (To pin a tag/branch instead of `main`, swap
+`refs/heads/main` for e.g. `refs/tags/v0.1.0`.)
 
 ### 2. Gather optional NCBI credentials
 
@@ -79,9 +82,9 @@ Defaults (overridable): `--config ~/.workbuddy/mcp.json`,
 The script:
 - reads `<repo>/plugins/openscience/.mcp.json` and resolves Claude variables
   (`${CLAUDE_PLUGIN_ROOT}`, `${user_config.*}`) to literal absolute paths/values;
-- injects `CLAUDE_PLUGIN_DATA` into each entry's `env` so launch.sh places the
+- injects `CLAUDE_PLUGIN_DATA` into each entry's `env` so bootstrap.py places the
   private venv under `--data-dir` (outside the repo) — this works against an
-  unmodified launch.sh, which is why no repo edit is needed;
+  unmodified repo, which is why no repo edit is needed;
 - merges into `~/.workbuddy/mcp.json`: existing entries are preserved, same-name
   servers are skipped (never overwritten), and a malformed existing config
   aborts without modification.
@@ -93,7 +96,7 @@ WorkBuddy):
 
 1. Open WorkBuddy -> connector management (top-right).
 2. For each new `openscience` server entry, click **Trust**.
-3. On first tool call, launch.sh builds the venv at the `--data-dir` (one time,
+3. On first tool call, bootstrap.py builds the venv at the `--data-dir` (one time,
    ~1 min); subsequent starts are instant.
 
 ### 6. Confirm
@@ -115,9 +118,9 @@ these variables, so this skill resolves them offline:
 | `${user_config.ncbi_api_key}` | literal key (or empty) |
 | (venv location) | `CLAUDE_PLUGIN_DATA` env var -> `--data-dir` |
 
-The repo's `bin/launch.sh` already reads `CLAUDE_PLUGIN_DATA` (with a repo-local
+The repo's launcher already reads `CLAUDE_PLUGIN_DATA` (with a repo-local
 fallback), so injecting it via the env block places the venv outside the repo
-without any edit to launch.sh. This is the key to zero-repo-change support.
+without any repo edit. This is the key to zero-repo-change support.
 
 ## Removing / managing servers
 
