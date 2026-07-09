@@ -1,0 +1,31 @@
+{
+  "name": "openscience",
+  "version": "0.1.0",
+  "description": "One-install access to 23 life-sciences MCP servers (PubChem, Ensembl, UniProt, PDB, AlphaFold, GEO, ClinVar, gnomAD, PubMed, and more) — vendored from Claude Science and fully self-contained.",
+  "author": {
+    "name": "aipoch"
+  },
+  "keywords": [
+    "mcp",
+    "bioinformatics",
+    "life-sciences",
+    "genomics",
+    "chemistry",
+    "literature"
+  ],
+  "userConfig": {
+    "contact_email": {
+      "type": "string",
+      "title": "Contact email (NCBI etiquette)",
+      "description": "NCBI E-utilities (PubMed, dbSNP, ClinVar, GEO) ask callers to identify themselves with a contact email. Some tools require it. Leave blank to skip those calls.",
+      "required": false
+    },
+    "ncbi_api_key": {
+      "type": "string",
+      "title": "NCBI API key (optional)",
+      "description": "Optional NCBI API key to raise the E-utilities rate limit from 3 to 10 requests/second.",
+      "sensitive": true,
+      "required": false
+    }
+  }
+}

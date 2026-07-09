@@ -1,8 +1,8 @@
 # aipoch-openscience-mcp
 
-A **Claude Code plugin marketplace** that gives you one-install access to **23 life-sciences
-MCP servers** — PubChem, ChEMBL, Ensembl, UniProt, PDB, AlphaFold, GEO, ArrayExpress, gnomAD,
-ClinVar, GWAS Catalog, GTEx, OpenAlex, PubMed, ClinicalTrials.gov, and more.
+One-install access to **23 life-sciences MCP servers** — PubChem, ChEMBL, Ensembl, UniProt, PDB,
+AlphaFold, GEO, ArrayExpress, gnomAD, ClinVar, GWAS Catalog, GTEx, OpenAlex, PubMed,
+ClinicalTrials.gov, and more.
 
 The servers are vendored from Claude Science and **fully self-contained**: the plugin bootstraps
 its own Python virtualenv on first run, so **no Claude Science installation is required**.
@@ -31,20 +31,39 @@ All tools are read-only retrieval against public databases.
 
 ## Requirements
 
-- **Claude Code** (recent version with plugin support).
+- A host with MCP support — **Claude Code** (plugin support) or **WorkBuddy** (skill install, see below).
 - **Python ≥ 3.11** on your `PATH` (used once to build the plugin's private virtualenv).
 - Network access on first run (to `pip install` the pinned dependencies).
 
 ## Install
 
+Installation depends on your agent host. Currently supported:
+
+### Claude Code
+
 ```shell
-# From the repo root (or point at wherever you cloned it):
-/plugin marketplace add ./
+/plugin marketplace add aipoch/openscience-mcp
 /plugin install openscience@aipoch-openscience
 ```
 
 Restart Claude Code when prompted. On the first tool call, the plugin builds its virtualenv and
 installs dependencies (about a minute, one time). Subsequent starts are instant.
+
+### WorkBuddy
+
+This repo ships a self-contained skill, `openscience-mcp-connector`, under
+[`.workbuddy/skills/openscience-mcp-connector`](.workbuddy/skills/openscience-mcp-connector). 
+
+```shell
+python .workbuddy/skills/openscience-mcp-connector/scripts/install.py \
+  --repo "$(pwd)" --data-dir ~/.cache/openscience-mcp
+# then enable the new connectors in WorkBuddy's connector settings
+```
+
+Pass `--servers chemistry,pubmed` to install a subset and avoid loading all 233 tools at once. See
+the skill's `SKILL.md` for the full workflow.
+
+_More agent frameworks and MCP hosts are on the [roadmap](ROADMAP.md)._
 
 ## Configuration (optional)
 
@@ -67,14 +86,19 @@ Just describe what you need, or name a source. Examples:
 
 ## Verification
 
-Every server is covered by an integration test harness:
+Every server is covered by an integration test harness. The launcher's own unit + integration
+tests run standalone:
 
 ```shell
-python scripts/test_all_servers.py          # boots all 23, enumerates every tool, live-calls a sample
-bash tests/launch_smoke.sh                   # unit + integration tests for the launcher
+bash tests/launch_smoke.sh   # unit + integration tests for the plugin launcher
 ```
 
-Results are written to `tests/results/` (`SUMMARY.md` plus a per-server tool inventory).
+Per-server results — every server booted, all 233 tools enumerated, and a representative live call
+per server — come from the integration harness (needs network; upstream databases may rate-limit):
+
+```shell
+python tests/test_all_servers.py   # boots each server, enumerates tools, runs representative calls
+```
 
 ## How it works
 
@@ -82,10 +106,15 @@ Results are written to `tests/results/` (`SUMMARY.md` plus a per-server tool inv
 - `plugins/openscience/bin/launch.sh` — bootstraps a private virtualenv in the plugin's data
   directory and launches a server over stdio. No Claude Science dependency.
 - `plugins/openscience/.mcp.json` — registers the 23 servers with Claude Code.
-- `scripts/vendor-sync.sh` — refreshes the vendored source from a local Claude Science runtime.
 
-## License / provenance
+## Roadmap
 
-The vendored server code originates from the Claude Science bundled `bio-tools` MCP servers.
-See `plugins/openscience/runtime/VENDOR_SOURCE.txt` for the exact source and sync timestamp.
-Each upstream database has its own terms; review the source licenses for your use case.
+Phase 1 (this release) ships the 23 servers over stdio. Phase 2 introduces a gateway with dynamic
+tool discovery to cut process count and context cost. See [ROADMAP.md](ROADMAP.md).
+
+## License
+
+The vendored server code originates from the Claude Science bundled `bio-tools` MCP servers; see
+[`plugins/openscience/runtime/VENDOR_SOURCE.txt`](plugins/openscience/runtime/VENDOR_SOURCE.txt)
+for provenance. Each upstream database has its own terms of use — review the individual source
+licenses for your use case.

@@ -1,0 +1,17 @@
+**/.DS_Store
+
+var/
+
+# Bootstrapped virtualenvs (created on first run / by tests)
+tests/.venv-data/
+plugins/openscience/.venv-local/
+
+# Python caches
+**/__pycache__/
+*.pyc
+
+# Personal local-scope plugin activation (created by `claude plugin install --scope local`)
+.claude/settings.local.json
+
+# Private / internal
+tests/results/

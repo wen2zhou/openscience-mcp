@@ -1,0 +1,17 @@
+# Runtime dependencies for the vendored Claude Science bio-tools MCP servers.
+# Versions are pinned to match the claude-science `claude-science-mcp` conda
+# env (Python 3.13) that these servers were validated against. lxml and
+# biopython are added here because a few servers import them lazily
+# (biomart, biorxiv, omics-archives, pubmed/europepmc fetch paths).
+mcp==1.27.1
+httpx==0.28.1
+httpx-sse==0.4.3
+requests==2.33.1
+urllib3==2.7.0
+anyio==4.14.1
+pandas==2.3.3
+numpy==2.5.0
+pydantic==2.13.4
+pydantic-settings==2.14.2
+lxml>=5.3
+biopython>=1.85
