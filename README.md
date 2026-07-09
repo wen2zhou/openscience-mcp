@@ -31,7 +31,7 @@ All tools are read-only retrieval against public databases.
 
 ## Requirements
 
-- **Claude Code** (recent version with plugin support).
+- A host with MCP support — **Claude Code** (plugin support) or **WorkBuddy** (skill install, see below).
 - **Python ≥ 3.11** on your `PATH` (used once to build the plugin's private virtualenv).
 - Network access on first run (to `pip install` the pinned dependencies).
 
@@ -48,6 +48,20 @@ Installation depends on your agent host. Currently supported:
 
 Restart Claude Code when prompted. On the first tool call, the plugin builds its virtualenv and
 installs dependencies (about a minute, one time). Subsequent starts are instant.
+
+### WorkBuddy
+
+This repo ships a self-contained skill, `openscience-mcp-installer`, under
+[`.workbuddy/skills/openscience-mcp-installer`](.workbuddy/skills/openscience-mcp-installer). 
+
+```shell
+python .workbuddy/skills/openscience-mcp-installer/scripts/install.py \
+  --repo "$(pwd)" --data-dir ~/.cache/openscience-mcp
+# then enable the new connectors in WorkBuddy's connector settings
+```
+
+Pass `--servers chemistry,pubmed` to install a subset and avoid loading all 233 tools at once. See
+the skill's `SKILL.md` for the full workflow.
 
 _More agent frameworks and MCP hosts are on the [roadmap](ROADMAP.md)._
 
