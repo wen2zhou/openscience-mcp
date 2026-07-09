@@ -1,0 +1,179 @@
+{
+  "_comment": "Representative read-only live calls, one or two per server, using well-known biological identifiers. A non-error response (even an empty result set) counts as a pass: it proves the server reaches its upstream API and marshals a valid MCP response.",
+  "biomart": [
+    {
+      "tool": "list_marts",
+      "arguments": {}
+    }
+  ],
+  "biorxiv": [
+    {
+      "tool": "get_categories",
+      "arguments": {}
+    }
+  ],
+  "cancer-models": [
+    {
+      "tool": "cbioportal_list_studies",
+      "arguments": {}
+    }
+  ],
+  "cellguide": [
+    {
+      "tool": "search_cell_types",
+      "arguments": {
+        "query": "T cell"
+      }
+    }
+  ],
+  "chembl": [
+    {
+      "tool": "compound_search",
+      "arguments": {
+        "name": "aspirin"
+      }
+    }
+  ],
+  "chemistry": [
+    {
+      "tool": "pubchem_search_compounds",
+      "arguments": {
+        "query": "aspirin"
+      }
+    }
+  ],
+  "clinical-genomics": [
+    {
+      "tool": "civic_search_genes",
+      "arguments": {
+        "entrez_symbol": "BRAF"
+      }
+    }
+  ],
+  "clinical-trials": [
+    {
+      "tool": "get_trial_details",
+      "arguments": {
+        "nct_id": "NCT04280705"
+      }
+    }
+  ],
+  "drug-regulatory": [
+    {
+      "tool": "list_pharmacologic_classes",
+      "arguments": {}
+    }
+  ],
+  "expression": [
+    {
+      "tool": "gtex_tissue_sites",
+      "arguments": {}
+    }
+  ],
+  "genes-ontologies": [
+    {
+      "tool": "search_ontology_terms",
+      "arguments": {
+        "query": "apoptosis"
+      }
+    }
+  ],
+  "genomes": [
+    {
+      "tool": "ensembl_lookup",
+      "arguments": {
+        "query": "BRCA2"
+      }
+    }
+  ],
+  "human-genetics": [
+    {
+      "tool": "gwas_search_traits",
+      "arguments": {
+        "query": "height"
+      }
+    }
+  ],
+  "literature": [
+    {
+      "tool": "openalex_search_authors",
+      "arguments": {
+        "query": "Doudna"
+      }
+    }
+  ],
+  "omics-archives": [
+    {
+      "tool": "metabolights_list_studies",
+      "arguments": {}
+    }
+  ],
+  "protein-annotation": [
+    {
+      "tool": "get_protein_atlas_gene",
+      "arguments": {
+        "gene": "TP53"
+      }
+    }
+  ],
+  "pubmed": [
+    {
+      "tool": "get_article_metadata",
+      "arguments": {
+        "pmids": [
+          "31452104"
+        ]
+      }
+    }
+  ],
+  "regulation": [
+    {
+      "tool": "jaspar_list_collections",
+      "arguments": {}
+    }
+  ],
+  "research-resources": [
+    {
+      "tool": "search_antibodies",
+      "arguments": {
+        "query": "CD4"
+      }
+    }
+  ],
+  "rna": [
+    {
+      "tool": "get_family",
+      "arguments": {
+        "family": "RF00001"
+      }
+    }
+  ],
+  "structures-interactions": [
+    {
+      "tool": "emdb_search_entries",
+      "arguments": {
+        "query": "ribosome"
+      }
+    }
+  ],
+  "variants": [
+    {
+      "tool": "dbsnp_get_rsids",
+      "arguments": {
+        "rsids": [
+          "rs6025"
+        ]
+      }
+    }
+  ],
+  "zinc": [
+    {
+      "tool": "zinc_search_by_id",
+      "arguments": {
+        "zinc_ids": [
+          "ZINC000000000053"
+        ]
+      }
+    }
+  ]
+}

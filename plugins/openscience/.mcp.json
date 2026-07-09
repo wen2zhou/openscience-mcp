@@ -1,0 +1,234 @@
+{
+  "mcpServers": {
+    "biomart": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_biomart"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "biorxiv": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_biorxiv"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "cancer-models": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_cancer_models"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "cellguide": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_cellguide"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "chembl": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_chembl"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "chemistry": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_chemistry"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "clinical-genomics": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_clinical_genomics"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "clinical-trials": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_clinical_trials"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "drug-regulatory": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_drug_regulatory"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "expression": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_expression"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "genes-ontologies": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_genes_ontologies"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "genomes": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_genomes"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "human-genetics": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_human_genetics"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "literature": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_literature"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "omics-archives": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_omics_archives"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "protein-annotation": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_protein_annotation"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "pubmed": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_pubmed"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "regulation": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_regulation"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "research-resources": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_research_resources"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "rna": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_rna"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "structures-interactions": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_structures_interactions"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "variants": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_variants"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    },
+    "zinc": {
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/launch.sh",
+      "args": [
+        "mcp_zinc"
+      ],
+      "env": {
+        "NCBI_EMAIL": "${user_config.contact_email}",
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}"
+      }
+    }
+  }
+}

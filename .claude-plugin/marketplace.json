@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "aipoch-openscience",
+  "owner": {
+    "name": "aipoch"
+  },
+  "description": "Life-sciences MCP servers for Claude Code, vendored from Claude Science.",
+  "plugins": [
+    {
+      "name": "openscience",
+      "source": "./plugins/openscience",
+      "description": "One-install access to 23 life-sciences MCP servers — fully self-contained, no Claude Science required.",
+      "version": "0.1.0"
+    }
+  ]
+}
